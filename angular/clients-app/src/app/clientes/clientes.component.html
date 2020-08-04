@@ -1,0 +1,40 @@
+<div class="card border-primary mb-3">
+    <div class="card-header">Clientes</div>
+    <div class="card-body text-primary">
+      <h5 class="card-title">Listado de clientes</h5>
+
+      <div class="my-2 text-left">
+          <button class="btn btn-rounded btn-primary" type="button" [routerLink]="['/clientes/form']">Crear Cliente</button>
+      </div>
+
+      <div *ngIf="clientes?.length == 0" class="alert alert-info">
+        No hay registros en la DDBB.
+      </div>
+
+        <table class="table table-bordered table-striped" *ngIf="clientes?.length > 0">
+            <thead>
+                <tr>
+                    <th>id</th>
+                    <th>name</th>
+                    <th>surname</th>
+                    <th>email</th>
+                    <th>createAt</th>
+                    <th>edit</th>
+                    <th>delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let client of clientes">
+                    <td>{{client.id}}</td>
+                    <td>{{client.name}}</td>
+                    <td>{{client.surname | uppercase}}</td>
+                    <td>{{client.email}}</td>
+                    <td>{{client.createdAt | date:'dd-MM-yyyy'}}</td>
+                    <td><button [routerLink]="['/clientes/form', client.id]" class="btn btn-primary btn-sm">Edit</button></td>
+                    <td><button (click)="delete(client)" class="btn btn-danger btn-sm">Delete</button></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+  </div>
